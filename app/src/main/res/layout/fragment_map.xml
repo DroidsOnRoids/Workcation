@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:id="@+id/container_main">
+
+    <fragment
+        android:id="@+id/mapview"
+        class="com.droidsonroids.workcation.common.maps.WorkcationSupportMapFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="@dimen/map_margin_bottom" />
+
+    <ImageView
+        android:id="@+id/imageview_map"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="@dimen/map_margin_bottom"/>
+
+    <FrameLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerview"
+            android:layout_width="match_parent"
+            android:layout_height="220dp"
+            android:layout_gravity="bottom" />
+
+    </FrameLayout>
+
+</android.support.design.widget.CoordinatorLayout>

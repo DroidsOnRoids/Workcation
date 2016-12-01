@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="8dp"
+    android:layout_height="8dp">
+    <item>
+        <rotate
+            android:drawable="@drawable/ic_arrow_upward_white_18dp" android:fromDegrees="45"
+            android:toDegrees="180"/>
+    </item>
+</layer-list>

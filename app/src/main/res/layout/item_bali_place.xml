@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="150dp"
+    android:layout_height="210dp"
+    android:layout_marginLeft="@dimen/default_layout_margin_halved"
+    android:layout_marginRight="@dimen/default_layout_margin_halved"
+    android:id="@+id/root"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/image_place_details"
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:scaleType="center"
+            android:layout_weight="1"
+            />
+
+        <TextView
+            android:id="@+id/textview_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:layout_margin="@dimen/default_layout_margin_halved"
+            android:ellipsize="end"
+            android:layout_gravity="center_vertical"
+            android:textAppearance="@style/RobotoBold"
+            android:textColor="@color/item_place_title"
+            android:textStyle="bold"
+            android:textSize="@dimen/textsize_medium"
+            android:transitionName="titleTransition"
+            tools:text="Monkey Forest"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="@dimen/default_layout_margin_quartered">
+
+            <ImageView
+                android:layout_width="@dimen/default_layout_margin"
+                android:layout_height="@dimen/default_layout_margin"
+                android:src="@drawable/ic_clock_small"
+                android:layout_marginStart="@dimen/default_layout_margin_halved"
+                android:layout_marginEnd="@dimen/default_layout_margin_halved"/>
+
+            <TextView
+                android:id="@+id/opening_hours"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:gravity="center_vertical"
+                android:ellipsize="end"
+                android:textAppearance="@style/RobotoThin"
+                android:textColor="@color/item_place_subtitle"
+                android:textSize="@dimen/textsize_small"
+                tools:text="08:30 - 18:00"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="@dimen/default_layout_margin_halved">
+
+            <ImageView
+                android:layout_width="@dimen/default_layout_margin"
+                android:layout_height="@dimen/default_layout_margin"
+                android:src="@drawable/ic_price_small"
+                android:layout_marginStart="@dimen/default_layout_margin_halved"
+                android:layout_marginEnd="@dimen/default_layout_margin_halved"/>
+
+            <TextView
+                android:id='@+id/price'
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:gravity="center_vertical"
+                android:ellipsize="end"
+                android:textAppearance="@style/RobotoThin"
+                android:textColor="@color/item_place_subtitle"
+                android:textSize="@dimen/textsize_small"
+                tools:text="40000 IDR"/>
+
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/number"
+        android:layout_width="@dimen/item_recycler_number_dimen"
+        android:layout_height="@dimen/item_recycler_number_dimen"
+        app:layout_anchor="@id/container_layout"
+        app:layout_anchorGravity="top|center"/>
+
+</android.support.v7.widget.CardView>

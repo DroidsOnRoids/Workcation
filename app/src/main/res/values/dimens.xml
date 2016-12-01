@@ -1,0 +1,27 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="main_app_bar_height">250dp</dimen>
+    <dimen name="main_overlap_top">40dp</dimen>
+    <dimen name="main_double_cardview_container_height">140dp</dimen>
+    <dimen name="default_layout_margin_halved">8dp</dimen>
+    <dimen name="default_layout_margin">16dp</dimen>
+    <dimen name="default_layout_margin_quartered">4dp</dimen>
+
+    <dimen name="textsize_very_small">9sp</dimen>
+    <dimen name="textsize_small">11sp</dimen>
+    <dimen name="textsize_medium">13sp</dimen>
+    <dimen name="textsize_big">16sp</dimen>
+    <dimen name="textsize_very_big">18sp</dimen>
+    <dimen name="textsize_huge">21sp</dimen>
+    <dimen name="textsize_very_huge">26sp</dimen>
+    <dimen name="textsize_enormous">36sp</dimen>
+
+    <dimen name="main_cardview_trip_height">142dp</dimen>
+    <dimen name="recycler_item_place">120dp</dimen>
+    <dimen name="map_margin_bottom">200dp</dimen>
+    <dimen name="item_recycler_number_dimen">24dp</dimen>
+    <dimen name="default_layout_margin_three_fourths">12dp</dimen>
+    <dimen name="item_place_details_height">380dp</dimen>
+</resources>

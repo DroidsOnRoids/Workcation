@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="primary_text">#212121</color>
+    <color name="secondary_text">#727272</color>
+    <color name="icons">#FFFFFF</color>
+    <color name="divider">#B6B6B6</color>
+    <color name="white">#FFFFFF</color>
+
+    <color name="cardview_weather_start_color">#fab527</color>
+    <color name="cardview_weather_center_color">#f9e388</color>
+    <color name="cardview_weather_end_color">#efc74f</color>
+
+    <color name="cardview_timeline_start_color">#7ebdc2</color>
+    <color name="cardview_timeline_end_color">#91d3d9</color>
+
+    <color name="icon_normal">#33495f</color>
+    <color name="icon_focused">#227eba</color>
+    <color name="cardview_trip_start_color">#3ab795</color>
+    <color name="cardview_trip_end_color">#12eaaf</color>
+    <color name="item_place_title">#2c3e51</color>
+    <color name="item_place_subtitle">#7f8c8d</color>
+    <color name="place_details_background">#52000000</color>
+    <color name="item_place_details_subtitle">#227eba</color>
+    <color name="button_red">#e74c3c</color>
+    <color name="item_place_description">#7f8c8d</color>
+
+    <color name="background_weather_start">#f9dd69</color>
+    <color name="background_schedule_start">#5fbdc6</color>
+    <color name="background_next_trip_start">#3ab781</color>
+    <color name="background_weather_end">#faefc5</color>
+    <color name="background_schedule_end">#bcebef</color>
+    <color name="background_next_trip_end">#b5fcbc</color>
+    <color name="transparent">#00000000</color>
+</resources>

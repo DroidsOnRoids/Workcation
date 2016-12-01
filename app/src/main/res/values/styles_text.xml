@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="RobotoThin" parent="android:TextAppearance">
+        <item name="fontPath">fonts/Roboto-Thin.ttf</item>
+    </style>
+
+    <style name="RobotoLight" parent="android:TextAppearance">
+        <item name="fontPath">fonts/Roboto-Light.ttf</item>
+    </style>
+
+    <style name="RobotoRegular" parent="android:TextAppearance">
+        <item name="fontPath">fonts/Roboto-Regular.ttf</item>
+    </style>
+
+    <style name="RobotoMedium" parent="android:TextAppearance">
+        <item name="fontPath">fonts/Roboto-Medium.ttf</item>
+    </style>
+
+    <style name="RobotoBold" parent="android:TextAppearance">
+        <item name="fontPath">fonts/Roboto-Bold.ttf</item>
+    </style>
+
+    <style name="TemperatureTextStyle" parent="RobotoBold">
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+</resources>

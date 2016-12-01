@@ -1,0 +1,91 @@
+{
+  "places": [
+    {
+      "name":"Monkey Forest",
+      "opening_hours":"08:30-18:00",
+      "price":40000,
+      "description":"The mission of The Sacred Monkey Forest Sanctuary(Monkey Forest Ubud) is conserving the area based on the concept of Tri Hita Karana",
+      "lat":-8.5191644,
+      "lng":115.2592073,
+      "photo": [
+        "monkey_forest_1", "monkey_forest_2", "monkey_forest_3", "monkey_forest_4"
+      ]
+    },
+    {
+      "name":"Goa Gajah",
+      "opening_hours":"08:00 - 18:00",
+      "price":0,
+      "description":"Goa Gajah, or Elephant Cave, is located on the island of Bali near Ubud, in Indonesia. Built in the 9th century, it served as a sanctuary.",
+      "lat":-8.5234325,
+      "lng":115.2849681,
+      "photo": [
+        "monkey_forest_1", "monkey_forest_2", "monkey_forest_3", "monkey_forest_4"
+      ]
+    },
+    {
+      "name":"Saraswati Temple",
+      "opening_hours":"ALL DAY",
+      "price":0,
+      "description":"The Pura Taman Saraswati is a beautiful water temple in central Ubud, accessible from the Jalan Kajeng side street off the main road of Jalan Raya Ubud",
+      "lat":-8.5059516,
+      "lng":115.2593039,
+      "photo": [
+        "monkey_forest_1", "monkey_forest_2", "monkey_forest_3", "monkey_forest_4"
+      ]
+    },
+    {
+      "name":"Luwak Coffee",
+      "opening_hours":"07:30 - 15:30",
+      "price":0,
+      "description":"Kopi luwak or civet coffee, refers to the coffee that includes part-digested coffee cherries eaten and defecated by the Asian palm civet",
+      "lat":-8.4404213,
+      "lng":115.2784738,
+      "photo": [
+        "monkey_forest_1", "monkey_forest_2", "monkey_forest_3", "monkey_forest_4"
+      ]
+    },
+    {
+      "name":"Pura Gunung Kawi",
+      "opening_hours":"09:00 - 18:00",
+      "price":20000,
+      "description":"Gunung Kawi is an 11th-century temple and funerary complex in Tampaksiring north east of Ubud in Bali, Indonesia, that is spread across either side of the Pakerisan river",
+      "lat":-8.4227631,
+      "lng":115.3105179,
+      "photo": [
+        "monkey_forest_1", "monkey_forest_2", "monkey_forest_3", "monkey_forest_4"
+      ]
+    },
+    {
+      "name":"Ubud Palace",
+      "opening_hours":"ALL DAY",
+      "price":0,
+      "description":"The Ubud Palace, officially Puri Saren Agung, is a historical building complex situated in Ubud, Gianyar Regency of Bali, Indonesia.",
+      "lat":-8.4229349,
+      "lng":115.2429149,
+      "photo": [
+        "monkey_forest_1", "monkey_forest_2", "monkey_forest_3", "monkey_forest_4"
+      ]
+    },
+    { "name":"Tegallang",
+      "opening_hours":"ALL DAY",
+      "price":0,
+      "description":"Tegalalang Rice Terrace is one of the famous tourist objects in Bali situated in Tegalalang Village north of Ubud Bali featured by the amazing rice terrace.",
+      "lat":-8.410152,
+      "lng":115.2177404,
+      "photo": [
+        "monkey_forest_1", "monkey_forest_2", "monkey_forest_3", "monkey_forest_4"
+      ]
+    },
+    {
+      "name":"Pura Dalem Agung",
+      "opening_hours":"ALL DAY",
+      "price":0,
+      "description":"Pura Dalem Agung Padangtegal, or Padangtegal Great Temple of Death, is one of three Hindu temples making up a temple complex located in the Sacred Monkey Forest Sanctuary",
+      "lat":-8.439027,
+      "lng":115.3005713,
+      "photo": [
+        "monkey_forest_1", "monkey_forest_2", "monkey_forest_3", "monkey_forest_4"
+      ]
+    }
+  ]
+}

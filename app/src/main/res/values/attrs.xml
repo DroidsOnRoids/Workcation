@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="TimelineView">
+        <attr name="tv_margin" format="dimension"/>
+        <attr name="tv_lineThickness" format="dimension" />
+        <attr name="tv_radius" format="dimension" />
+        <attr name="tv_outerRadius" format="dimension" />
+        <attr name="tv_color" format="color" />
+    </declare-styleable>
+
+    <declare-styleable name="ScaleDownImageTransition">
+        <attr name="factor" format="integer"/>
+    </declare-styleable>
+</resources>

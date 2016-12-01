@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<transitionSet xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <transition class="com.droidsonroids.workcation.common.transitions.ScaleDownImageTransition"
+        app:factor="8">
+        <targets>
+            <target id="@id/imageview_map" />
+        </targets>
+    </transition>
+
+</transitionSet>

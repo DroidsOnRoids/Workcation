@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+<gradient
+    android:type="radial"
+    android:centerX="100%"
+    android:centerY="0%"
+    android:gradientRadius="130%"
+    android:startColor="@color/cardview_weather_start_color"
+    android:centerColor="@color/cardview_weather_center_color"
+    android:endColor="@color/cardview_weather_end_color" />
+
+</shape>
