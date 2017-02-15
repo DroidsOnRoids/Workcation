@@ -1,61 +1,88 @@
-package com.droidsonroids.workcation.common.views;
+package com.droidsonroids.workcation.common.maps;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
+import android.animation.ValueAnimator;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Point;
-import android.graphics.drawable.TransitionDrawable;
 import android.support.v4.content.ContextCompat;
-import android.support.v4.text.TextUtilsCompat;
 import android.text.TextUtils;
-import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.FrameLayout;
-import android.widget.TextView;
 import com.droidsonroids.workcation.R;
+import com.droidsonroids.workcation.common.maps.MarkerView;
+import com.droidsonroids.workcation.common.views.GuiUtils;
+import com.google.android.gms.maps.model.LatLng;
 
-public class PulseView extends View {
+public class PulseMarkerView extends MarkerView {
 
+    private final Context context;
     private float mSize;
     private Animation mScaleAnimation;
-    private int mPadding;
-    private final Context mContext;
     private Paint mStrokeBackgroundPaint;
     private Paint mBackgroundPaint;
     private String mText;
     private Paint mTextPaint;
-    private Point mPoint;
-    private AnimatorSet showAnimatorSet;
+    private AnimatorSet showAnimatorSet, hideAnimatorSet, pulseAnimatorSet;
 
-    public PulseView(final Context context) {
-        this(context, null);
-    }
-
-    public PulseView(final Context context, final AttributeSet attrs) {
-        super(context, attrs);
-        mContext = context;
+    public PulseMarkerView(final Context context, final LatLng latLng, final Point point) {
+        super(context, latLng, point);
+        this.context = context;
         setVisibility(View.INVISIBLE);
         setupSizes(context);
         setupScaleAnimation(context);
         setupBackgroundPaint(context);
         setupStrokeBackgroundPaint(context);
         setupTextPaint(context);
-        setupShowAnimation();
+        setupShowAnimatorSet();
+        setupHideAnimatorSet();
+        setupPulseAnimator();
+    }
+
+    public PulseMarkerView(final Context context, final LatLng latLng, final Point point, final int position) {
+        this(context, latLng, point);
+        mText = String.valueOf(position);
+    }
+
+    private void setupPulseAnimator() {
+        ObjectAnimator animatorScaleX = ObjectAnimator.ofFloat(this, View.SCALE_X, 1.0f, 1.5f);
+        animatorScaleX.setRepeatMode(ValueAnimator.REVERSE);
+        ObjectAnimator animatorScaleY = ObjectAnimator.ofFloat(this, View.SCALE_Y, 1.0f, 1.5f);
+        animatorScaleY.setRepeatMode(ValueAnimator.REVERSE);
+
+        pulseAnimatorSet = new AnimatorSet();
+        pulseAnimatorSet.setDuration(100);
+        pulseAnimatorSet.playTogether(animatorScaleX, animatorScaleY);
+    }
+
+    private void setupHideAnimatorSet() {
+        Animator animatorScaleX = ObjectAnimator.ofFloat(this, View.SCALE_X, 1.0f, 0.f);
+        Animator animatorScaleY = ObjectAnimator.ofFloat(this, View.SCALE_Y, 1.0f, 0.f);
+        Animator animator = ObjectAnimator.ofFloat(this, View.ALPHA, 1.f, 0.f).setDuration(300);
+        animator.addListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationStart(final Animator animation) {
+                super.onAnimationStart(animation);
+                setVisibility(View.INVISIBLE);
+                invalidate();
+            }
+        });
+        hideAnimatorSet = new AnimatorSet();
+        hideAnimatorSet.playTogether(animator, animatorScaleX, animatorScaleY);
     }
 
     private void setupSizes(final Context context) {
-        mPadding = context.getResources().getDimensionPixelSize(R.dimen.default_layout_margin_halved);
-        mSize = GuiUtils.dpToPx(mContext, 32) / 2;
+        mSize = GuiUtils.dpToPx(context, 32) / 2;
     }
 
-    private void setupShowAnimation() {
+    private void setupShowAnimatorSet() {
         Animator animatorScaleX = ObjectAnimator.ofFloat(this, View.SCALE_X, 1.5f, 1.f);
         Animator animatorScaleY = ObjectAnimator.ofFloat(this, View.SCALE_Y, 1.5f, 1.f);
         Animator animator = ObjectAnimator.ofFloat(this, View.ALPHA, 0.f, 1.f).setDuration(300);
@@ -99,11 +126,12 @@ public class PulseView extends View {
 
     @Override
     public void setLayoutParams(final ViewGroup.LayoutParams params) {
-        params.height = (params.height + (int)GuiUtils.dpToPx(mContext, 44)) / 2;
-        params.width =  (params.width + (int)GuiUtils.dpToPx(mContext, 44)) / 2;
-        ((FrameLayout.LayoutParams)params).leftMargin = mPoint.x - params.width / 2;
-        ((FrameLayout.LayoutParams)params).topMargin = mPoint.y - params.height / 2;
-        super.setLayoutParams(params);
+        FrameLayout.LayoutParams frameParams = new FrameLayout.LayoutParams(FrameLayout.LayoutParams.WRAP_CONTENT, FrameLayout.LayoutParams.WRAP_CONTENT);
+        frameParams.width = (int)GuiUtils.dpToPx(context, 44);
+        frameParams.height = (int)GuiUtils.dpToPx(context, 44);
+        frameParams.leftMargin = point.x - frameParams.width / 2;
+        frameParams.topMargin = point.y - frameParams.height / 2;
+        super.setLayoutParams(frameParams);
     }
 
     public void pulse() {
@@ -120,11 +148,11 @@ public class PulseView extends View {
 
     private void drawText(final Canvas canvas) {
         if(mText != null && !TextUtils.isEmpty(mText))
-            canvas.drawText(mText, getWidth() / 2, ((getHeight() / 2) - ((mTextPaint.descent() + mTextPaint.ascent()) / 2)), mTextPaint);
+            canvas.drawText(mText, mSize, (mSize - ((mTextPaint.descent() + mTextPaint.ascent()) / 2)), mTextPaint);
     }
 
     private void drawStrokeBackground(final Canvas canvas) {
-        canvas.drawCircle(mSize, mSize, GuiUtils.dpToPx(mContext, 28) / 2, mStrokeBackgroundPaint);
+        canvas.drawCircle(mSize, mSize, GuiUtils.dpToPx(context, 28) / 2, mStrokeBackgroundPaint);
     }
 
     private void drawBackground(final Canvas canvas) {
@@ -136,21 +164,20 @@ public class PulseView extends View {
         invalidate();
     }
 
+    @Override
     public void hide() {
-        Animator animatorScaleX = ObjectAnimator.ofFloat(this, View.SCALE_X, 1.0f, 0.f);
-        Animator animatorScaleY = ObjectAnimator.ofFloat(this, View.SCALE_Y, 1.0f, 0.f);
-        Animator animator = ObjectAnimator.ofFloat(this, View.ALPHA, 1.f, 0.f).setDuration(300);
-        animator.addListener(new AnimatorListenerAdapter() {
-            @Override
-            public void onAnimationStart(final Animator animation) {
-                super.onAnimationStart(animation);
-                setVisibility(View.INVISIBLE);
-                invalidate();
-            }
-        });
-        AnimatorSet animatorSet = new AnimatorSet();
-        animatorSet.playTogether(animator, animatorScaleX, animatorScaleY);
-        animatorSet.start();
+        hideAnimatorSet.start();
+    }
+
+    @Override
+    public void refresh(final Point point) {
+        this.point = point;
+        updatePulseViewLayoutParams(point);
+    }
+
+    @Override
+    public void show() {
+        showAnimatorSet.start();
     }
 
     public void showWithDelay(final int delay) {
@@ -158,16 +185,14 @@ public class PulseView extends View {
         showAnimatorSet.start();
     }
 
-    public void show() {
-        showAnimatorSet.start();
-    }
-
-    public void setPulseViewLayoutParams(final Point point) {
-        mPoint = point;
+    public void updatePulseViewLayoutParams(final Point point) {
+        this.point = point;
         FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(FrameLayout.LayoutParams.WRAP_CONTENT, FrameLayout.LayoutParams.WRAP_CONTENT);
-        params.leftMargin = point.x - getWidth() / 2;
-        params.topMargin = point.y - getHeight() / 2;
-        setLayoutParams(params);
+        params.width = (int)GuiUtils.dpToPx(context, 44);
+        params.height = (int)GuiUtils.dpToPx(context, 44);
+        params.leftMargin = point.x - params.width / 2;
+        params.topMargin = point.y - params.height / 2;
+        super.setLayoutParams(params);
         invalidate();
     }
 }

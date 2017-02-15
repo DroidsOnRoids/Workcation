@@ -5,7 +5,7 @@
 
     <fragment
         android:id="@+id/mapview"
-        class="com.droidsonroids.workcation.common.maps.WorkcationSupportMapFragment"
+        class="com.droidsonroids.workcation.common.maps.MapFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginBottom="@dimen/map_margin_bottom"/>
@@ -19,7 +19,7 @@
         />
 
     <include
-        layout="@layout/item_place_details"
+        layout="@layout/item_place"
         />
 
 </android.support.design.widget.CoordinatorLayout>

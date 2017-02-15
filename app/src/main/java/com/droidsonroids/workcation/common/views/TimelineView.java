@@ -8,18 +8,17 @@ import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
 import android.view.View;
 import com.droidsonroids.workcation.R;
-import com.droidsonroids.workcation.common.ViewUtils;
 
 public class TimelineView extends View {
 
-    private Paint mBackgroundPaint;
+    private Paint backgroundPaint;
     private boolean sizeChanged = false;
-    private int mWidth;
-    private int mHeight;
-    private float mMargin;
-    private int mLineThickness;
-    private int mRadius;
-    private int mOuterRadius;
+    private int width;
+    private int height;
+    private float margin;
+    private int lineThickness;
+    private int radius;
+    private int outerRadius;
 
     public TimelineView(final Context context) {
         this(context, null);
@@ -34,25 +33,25 @@ public class TimelineView extends View {
         int color;
         TypedArray array = context.obtainStyledAttributes(attrs, R.styleable.TimelineView);
         try {
-            mMargin = array.getDimensionPixelSize(R.styleable.TimelineView_tv_margin, (int)GuiUtils.dpToPx(context, 16));
-            mLineThickness = array.getDimensionPixelSize(R.styleable.TimelineView_tv_lineThickness, (int)GuiUtils.dpToPx(context, 2));
-            mRadius = array.getDimensionPixelSize(R.styleable.TimelineView_tv_radius, (int)GuiUtils.dpToPx(context, 4));
-            mOuterRadius = array.getDimensionPixelSize(R.styleable.TimelineView_tv_outerRadius, (int)GuiUtils.dpToPx(context, 2));
+            margin = array.getDimensionPixelSize(R.styleable.TimelineView_tv_margin, (int)GuiUtils.dpToPx(context, 16));
+            lineThickness = array.getDimensionPixelSize(R.styleable.TimelineView_tv_lineThickness, (int)GuiUtils.dpToPx(context, 2));
+            radius = array.getDimensionPixelSize(R.styleable.TimelineView_tv_radius, (int)GuiUtils.dpToPx(context, 4));
+            outerRadius = array.getDimensionPixelSize(R.styleable.TimelineView_tv_outerRadius, (int)GuiUtils.dpToPx(context, 2));
             color = array.getColor(R.styleable.TimelineView_tv_color, ContextCompat.getColor(context, R.color.white));
         } finally {
             array.recycle();
         }
-        mBackgroundPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        mBackgroundPaint.setColor(color);
-        mBackgroundPaint.setStrokeWidth(mLineThickness);
+        backgroundPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        backgroundPaint.setColor(color);
+        backgroundPaint.setStrokeWidth(lineThickness);
     }
 
     @Override
     protected void onSizeChanged(final int w, final int h, final int oldw, final int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
         if(!sizeChanged) {
-            mWidth = w;
-            mHeight = h;
+            width = w;
+            height = h;
             sizeChanged = true;
         }
     }
@@ -60,9 +59,9 @@ public class TimelineView extends View {
     @Override
     protected void onDraw(final Canvas canvas) {
         super.onDraw(canvas);
-        float startX = mOuterRadius + mRadius - mLineThickness / 2;
-        canvas.drawLine(startX, 0, startX, mHeight / 2 - mRadius - mOuterRadius,mBackgroundPaint);
-        canvas.drawCircle(startX, mHeight / 2,  mRadius, mBackgroundPaint);
-        canvas.drawLine(startX, mHeight / 2 + mRadius + mOuterRadius, startX, mHeight, mBackgroundPaint);
+        float startX = outerRadius + radius - lineThickness / 2;
+        canvas.drawLine(startX, 0, startX, height / 2 - radius - outerRadius, backgroundPaint);
+        canvas.drawCircle(startX, height / 2, radius, backgroundPaint);
+        canvas.drawLine(startX, height / 2 + radius + outerRadius, startX, height, backgroundPaint);
     }
 }

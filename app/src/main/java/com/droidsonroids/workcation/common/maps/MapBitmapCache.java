@@ -2,11 +2,10 @@ package com.droidsonroids.workcation.common.maps;
 
 import android.graphics.Bitmap;
 import android.util.LruCache;
-import com.droidsonroids.workcation.common.model.BaliDataProvider;
-import javax.crypto.spec.DESedeKeySpec;
 
 public class MapBitmapCache extends LruCache<String, Bitmap> {
     private static final int DEFAULT_CACHE_SIZE = (int) (Runtime.getRuntime().maxMemory() / 1024) / 8;
+    public static final String KEY = "MAP_BITMAP_KEY";
 
     private static MapBitmapCache sInstance;
     /**
@@ -26,12 +25,12 @@ public class MapBitmapCache extends LruCache<String, Bitmap> {
         return sInstance;
     }
 
-    public Bitmap getBitmap(final String key) {
-        return get(key);
+    public Bitmap getBitmap() {
+        return get(KEY);
     }
 
-    public void putBitmap(final String key, Bitmap bitmap) {
-        put(key, bitmap);
+    public void putBitmap(Bitmap bitmap) {
+        put(KEY, bitmap);
     }
 
     @Override

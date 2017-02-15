@@ -6,7 +6,7 @@
         android:slideEdge="bottom"
         android:interpolator="@android:interpolator/decelerate_cubic">
         <targets>
-            <target android:targetId="@id/layout_description" />
+            <target android:targetId="@id/descriptionLayout" />
         </targets>
     </slide>
 
@@ -15,7 +15,7 @@
         android:interpolator="@android:interpolator/decelerate_cubic"
         android:startDelay="100">
         <targets>
-            <target android:targetId="@id/textview_description" />
+            <target android:targetId="@id/description" />
         </targets>
     </slide>
 
@@ -23,7 +23,7 @@
         android:interpolator="@android:interpolator/decelerate_cubic"
         android:startDelay="100">
         <targets>
-            <target android:targetId="@id/textview_description" />
+            <target android:targetId="@id/description" />
         </targets>
     </fade>
 
@@ -32,7 +32,7 @@
         android:interpolator="@android:interpolator/decelerate_cubic"
         android:startDelay="200">
         <targets>
-            <target android:targetId="@id/button_take_me" />
+            <target android:targetId="@id/takeMe" />
         </targets>
     </slide>
 </transitionSet>

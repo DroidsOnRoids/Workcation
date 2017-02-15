@@ -4,11 +4,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".screens.main.MainActivity">
+    tools:MContext=".screens.main.MainActivity">
 
     <fragment
         android:id="@+id/mapview"
-        class="com.droidsonroids.workcation.common.maps.WorkcationSupportMapFragment"
+        class="com.droidsonroids.workcation.common.maps.MapFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginBottom="@dimen/map_margin_bottom"/>
@@ -20,7 +20,7 @@
         android:background="@color/white">
 
         <FrameLayout
-            android:id="@+id/container_layout"
+            android:id="@+id/container"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"/>
@@ -32,11 +32,11 @@
             android:weightSum="4"
             android:background="@android:color/white"
             android:elevation="8dp"
-            app:layout_anchor="@id/container_layout"
+            app:layout_anchor="@id/container"
             app:layout_anchorGravity="bottom">
 
             <ImageView
-                android:id="@+id/item_explore"
+                android:id="@+id/explore"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"

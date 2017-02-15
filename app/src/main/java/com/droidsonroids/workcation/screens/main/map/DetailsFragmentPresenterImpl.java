@@ -11,12 +11,12 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.gson.Gson;
 import com.google.maps.android.PolyUtil;
 import java.io.IOException;
-import java.util.List;
+import java.util.ArrayList;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.Response;
 
-public class MapFragmentPresenterImpl extends MvpPresenterImpl<MapFragmentView> implements MapFragmentPresenter {
+public class DetailsFragmentPresenterImpl extends MvpPresenterImpl<DetailsFragmentView> implements DetailsFragmentPresenter {
 
     private MapsApiManager mapsApiManager = MapsApiManager.instance();
     private BaliDataProvider baliDataProvider = BaliDataProvider.instance();
@@ -60,6 +60,6 @@ public class MapFragmentPresenterImpl extends MvpPresenterImpl<MapFragmentView> 
     }
 
     private void providePolylineToDraw(final String points) {
-        getView().drawPolylinesOnMap(PolyUtil.decode(points));
+        getView().drawPolylinesOnMap(new ArrayList<>(PolyUtil.decode(points)));
     }
 }

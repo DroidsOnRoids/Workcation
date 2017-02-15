@@ -22,7 +22,7 @@
     <color name="cardview_trip_end_color">#12eaaf</color>
     <color name="item_place_title">#2c3e51</color>
     <color name="item_place_subtitle">#7f8c8d</color>
-    <color name="place_details_background">#52000000</color>
+    <color name="place_details_background">#1e000000</color>
     <color name="item_place_details_subtitle">#227eba</color>
     <color name="button_red">#e74c3c</color>
     <color name="item_place_description">#7f8c8d</color>

@@ -19,13 +19,13 @@ import java.util.List;
 
 public class BaliPlacesAdapter extends RecyclerView.Adapter<BaliPlacesAdapter.BaliViewHolder> {
 
-    private final OnPlaceClickListener mListener;
-    private Context mContext;
-    private List<Place> mPlaceList = new ArrayList<>();
+    private final OnPlaceClickListener listener;
+    private Context context;
+    private List<Place> placeList = new ArrayList<>();
 
     BaliPlacesAdapter(OnPlaceClickListener listener, Context context) {
-        mListener = listener;
-        mContext = context;
+        this.listener = listener;
+        this.context = context;
     }
 
     @Override
@@ -35,21 +35,21 @@ public class BaliPlacesAdapter extends RecyclerView.Adapter<BaliPlacesAdapter.Ba
 
     @Override
     public void onBindViewHolder(final BaliViewHolder holder, final int position) {
-        holder.mTextViewName.setText(mPlaceList.get(position).getName());
-        holder.mTextViewOpeningHours.setText(mPlaceList.get(position).getOpeningHours());
-        holder.mTextViewPrice.setText(String.valueOf(mPlaceList.get(position).getPrice()));
-        holder.mImageViewPlacePhoto.setImageDrawable(ContextCompat.getDrawable(mContext, R.drawable.monkey_forest_1));
-        holder.mRoot.setOnClickListener(view -> mListener.onPlaceClicked(holder.mRoot, TransitionUtils.getRecyclerViewTransitionName(position), position));
+        holder.title.setText(placeList.get(position).getName());
+        holder.openingHours.setText(placeList.get(position).getOpeningHours());
+        holder.price.setText(String.valueOf(placeList.get(position).getPrice()));
+        holder.placePhoto.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.monkey_forest_1));
+        holder.root.setOnClickListener(view -> listener.onPlaceClicked(holder.root, TransitionUtils.getRecyclerViewTransitionName(position), position));
     }
 
     @Override
     public int getItemCount() {
-        return mPlaceList.size();
+        return placeList.size();
     }
 
     void setPlacesList(List<Place> placesList) {
-        mPlaceList = placesList;
-        for (int i = 0; i < mPlaceList.size(); i++) {
+        placeList = placesList;
+        for (int i = 0; i < placeList.size(); i++) {
             notifyItemInserted(i);
         }
     }
@@ -60,11 +60,11 @@ public class BaliPlacesAdapter extends RecyclerView.Adapter<BaliPlacesAdapter.Ba
 
     public class BaliViewHolder extends RecyclerView.ViewHolder {
 
-        @BindView(R.id.textview_title) TextView mTextViewName;
-        @BindView(R.id.price) TextView mTextViewPrice;
-        @BindView(R.id.opening_hours) TextView mTextViewOpeningHours;
-        @BindView(R.id.root) CardView mRoot;
-        @BindView(R.id.image_place_details) ImageView mImageViewPlacePhoto;
+        @BindView(R.id.title) TextView title;
+        @BindView(R.id.price) TextView price;
+        @BindView(R.id.opening_hours) TextView openingHours;
+        @BindView(R.id.root) CardView root;
+        @BindView(R.id.headerImage) ImageView placePhoto;
 
         BaliViewHolder(final View itemView) {
             super(itemView);

@@ -2,7 +2,6 @@ package com.droidsonroids.workcation.common.transitions;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
-import android.animation.AnimatorSet;
 import android.animation.ArgbEvaluator;
 import android.animation.ObjectAnimator;
 import android.animation.PropertyValuesHolder;
@@ -18,8 +17,6 @@ import android.graphics.PixelFormat;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
-import android.support.v4.view.ViewCompat;
-import android.support.v7.widget.ViewUtils;
 import android.transition.Transition;
 import android.transition.TransitionValues;
 import android.util.AttributeSet;

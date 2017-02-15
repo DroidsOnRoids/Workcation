@@ -4,7 +4,7 @@ apply plugin: 'me.tatarka.retrolambda'
 apply plugin: 'com.neenbedankt.android-apt'
 
 android {
-	compileSdkVersion 24
+	compileSdkVersion 25
 	buildToolsVersion "24.0.2"
 
 	def configuration = rootProject.extensions.getByName("ext")
@@ -12,7 +12,7 @@ android {
 	defaultConfig {
 		applicationId "com.droidsonroids.workcation"
 		minSdkVersion 21
-		targetSdkVersion 24
+		targetSdkVersion 25
 		versionCode 1
 		versionName "1.0"
 
@@ -39,13 +39,13 @@ dependencies {
 	compile fileTree(dir: 'libs', include: ['*.jar'])
 	testCompile 'junit:junit:4.12'
 	// Google Play Services
-	compile 'com.google.android.gms:play-services-maps:9.4.0'
+	compile 'com.google.android.gms:play-services-maps:10.0.1'
 
 	// Support Libraries
-	compile 'com.android.support:cardview-v7:24.2.1'
-	compile 'com.android.support:design:24.2.1'
-	compile 'com.android.support:palette-v7:24.2.1'
-	compile 'com.android.support:recyclerview-v7:24.2.1'
+	compile 'com.android.support:cardview-v7:25.1.0'
+	compile 'com.android.support:design:25.1.0'
+	compile 'com.android.support:palette-v7:25.1.0'
+	compile 'com.android.support:recyclerview-v7:25.1.0'
 
 	// Others
 	compile 'com.jakewharton:butterknife:8.2.1'
@@ -56,4 +56,5 @@ dependencies {
 	compile 'com.google.maps.android:android-maps-utils:0.4+'
 	compile 'com.squareup.okhttp3:logging-interceptor:3.3.1'
 	compile 'com.squareup.okhttp3:okhttp:3.4.2'
+	compile 'com.parse.bolts:bolts-tasks:1.4.0'
 }

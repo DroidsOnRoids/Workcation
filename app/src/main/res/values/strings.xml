@@ -7,4 +7,5 @@
     <string name="this_weekend">This weekend we\'re going to:</string>
     <string name="monkey_forest">Monkey Forest</string>
     <string name="sign_up_for_this">SIGN UP FOR THIS</string>
+    <string name="mapPlaceholderTransition">mapPlaceholderTransition</string>
 </resources>

@@ -3,14 +3,9 @@ package com.droidsonroids.workcation.screens.main.home;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
-import butterknife.BindView;
 import com.droidsonroids.workcation.R;
-import com.droidsonroids.workcation.common.maps.WorkcationSupportMapFragment;
 import com.droidsonroids.workcation.common.mvp.MvpFragment;
 import com.droidsonroids.workcation.screens.main.MainActivity;
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.SupportMapFragment;
 
 public class HomeFragment extends MvpFragment<HomeView, HomePresenter> implements HomeView {
     public static final String TAG = HomeFragment.class.getSimpleName();

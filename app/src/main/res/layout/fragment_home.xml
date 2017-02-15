@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".screens.main.MainActivity">
+    tools:MContext=".screens.main.MainActivity">
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/appbar"
@@ -39,7 +39,7 @@
     </android.support.design.widget.AppBarLayout>
 
     <android.support.v4.widget.NestedScrollView
-        android:id="@+id/nested_scroll_view"
+        android:id="@+id/nestedScrollView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:behavior_overlapTop="@dimen/main_overlap_top"
@@ -57,7 +57,7 @@
                 android:weightSum="2">
 
                 <android.support.v7.widget.CardView
-                    android:id="@+id/cardview_weather"
+                    android:id="@+id/weatherContainer"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginEnd="@dimen/default_layout_margin_quartered"
@@ -65,7 +65,7 @@
                     android:layout_weight="1">
 
                     <LinearLayout
-                        android:id="@+id/container_weather"
+                        android:id="@+id/weather"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:background="@drawable/cardview_weather_background"
@@ -106,7 +106,7 @@
                 </android.support.v7.widget.CardView>
 
                 <android.support.v7.widget.CardView
-                    android:id="@+id/cardview_timeline"
+                    android:id="@+id/timeline"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginEnd="@dimen/default_layout_margin"
@@ -114,7 +114,7 @@
                     android:layout_weight="1">
 
                     <LinearLayout
-                        android:id="@+id/container_schedule"
+                        android:id="@+id/schedule"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:background="@drawable/cardview_timeline_background"
@@ -151,7 +151,7 @@
                     android:layout_margin="@dimen/default_layout_margin">
 
                     <LinearLayout
-                        android:id="@+id/container_next_trip"
+                        android:id="@+id/nextTrip"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:background="@drawable/cardview_trip_background"
@@ -208,7 +208,7 @@
                 </android.support.v7.widget.CardView>
 
                 <com.github.florent37.diagonallayout.DiagonalLayout
-                    android:id="@+id/imageview_photo"
+                    android:id="@+id/photo"
                     android:layout_width="150dp"
                     android:layout_height="150dp"
                     android:layout_gravity="end|center_vertical"

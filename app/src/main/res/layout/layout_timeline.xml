@@ -7,7 +7,7 @@
     android:orientation="horizontal">
 
     <com.droidsonroids.workcation.common.views.TimelineView
-        android:id="@+id/timeline_view"
+        android:id="@+id/timelineView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:tv_lineThickness="2dp"
@@ -23,20 +23,20 @@
         android:layout_marginStart="@dimen/default_layout_margin">
 
         <TextView
-            android:id="@+id/timeline_hour"
+            android:id="@+id/hour"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_alignEnd="@id/timeline_view"
+            android:layout_alignEnd="@id/timelineView"
             android:text="12:00 - 13:00"
             android:textColor="@color/white"
             android:gravity="bottom"
             android:layout_weight="1"
             />
         <TextView
-            android:id="@+id/timeline_title"
+            android:id="@+id/title"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_alignEnd="@id/timeline_view"
+            android:layout_alignEnd="@id/timelineView"
             android:text="Workation"
             android:textAppearance="@style/RobotoBold"
             android:textStyle="bold"

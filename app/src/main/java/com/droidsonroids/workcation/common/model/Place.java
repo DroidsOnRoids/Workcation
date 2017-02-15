@@ -1,5 +1,6 @@
 package com.droidsonroids.workcation.common.model;
 
+import com.google.android.gms.maps.model.LatLng;
 import com.google.gson.annotations.SerializedName;
 import java.util.List;
 
@@ -72,5 +73,9 @@ public class Place {
 
     public void setPhotoList(final List<String> photo) {
         this.photo = photo;
+    }
+
+    public LatLng getLatLng() {
+        return new LatLng(lat, lng);
     }
 }

@@ -1,10 +1,5 @@
 package com.droidsonroids.workcation.common.transitions;
 
-import android.support.v4.view.ViewCompat;
-import android.util.Property;
-import android.util.TypedValue;
-import android.widget.TextView;
-
 public class TransitionUtils {
     private static final String DEFAULT_TRANSITION_NAME = "transition";
 

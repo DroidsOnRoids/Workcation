@@ -1,8 +1,6 @@
 package com.droidsonroids.workcation.common.maps;
 
 import com.droidsonroids.workcation.common.model.Bounds;
-import com.google.android.gms.maps.model.LatLngBounds;
-import com.google.maps.android.SphericalUtil;
 
 public class MapsUtil {
     public static final String MAP_BITMAP_KEY = "map_bitmap_key";

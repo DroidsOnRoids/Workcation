@@ -8,6 +8,6 @@ import com.google.android.gms.maps.GoogleMap;
 public class MainPresenterImpl extends MvpPresenterImpl<MainView> implements MainPresenter {
     @Override
     public void preloadMap(final GoogleMap googleMap) {
-        googleMap.snapshot(bitmap -> MapBitmapCache.instance().put(MapsUtil.MAP_BITMAP_KEY, bitmap));
+        googleMap.snapshot(bitmap -> MapBitmapCache.instance().putBitmap(bitmap));
     }
 }

@@ -13,6 +13,8 @@ import okhttp3.Response;
 import okhttp3.logging.HttpLoggingInterceptor;
 
 public class MapsApiManager {
+    private static final String ORIGIN = "origin";
+    private static final String DESTINATION = "destination";
 
     private static MapsApiManager sInstance;
     private OkHttpClient mClient;
@@ -34,8 +36,8 @@ public class MapsApiManager {
 
     public void getRoute(final LatLng start, final LatLng end, final Callback callback) {
         HttpUrl.Builder urlBuilder = HttpUrl.parse(RestConstants.BASE_URL).newBuilder();
-        urlBuilder.addQueryParameter("origin", start.latitude + "," + start.longitude);
-        urlBuilder.addQueryParameter("destination", end.latitude + "," + end.longitude);
+        urlBuilder.addQueryParameter(ORIGIN, start.latitude + "," + start.longitude);
+        urlBuilder.addQueryParameter(DESTINATION, end.latitude + "," + end.longitude);
 
         String url = urlBuilder.build().toString();
 
