@@ -1,5 +1,7 @@
 package com.droidsonroids.workcation.common.maps;
 
+import android.util.DisplayMetrics;
+import android.view.WindowManager;
 import com.droidsonroids.workcation.common.model.Bounds;
 
 public class MapsUtil {
@@ -14,4 +16,18 @@ public class MapsUtil {
         double updatedLat = LATITUDE_INCREASE_FACTOR * Math.abs(northeastLat - southwestLat);
         return String.valueOf(southwestLat - updatedLat);
     }
+
+    public static int calculateWidth(final WindowManager windowManager) {
+        DisplayMetrics metrics = new DisplayMetrics();
+        windowManager.getDefaultDisplay().getMetrics(metrics);
+        return metrics.widthPixels;
+    }
+
+    public static int calculateHeight(final WindowManager windowManager, final int paddingBottom) {
+        DisplayMetrics metrics = new DisplayMetrics();
+        windowManager.getDefaultDisplay().getMetrics(metrics);
+        return metrics.heightPixels - paddingBottom;
+    }
+
+
 }

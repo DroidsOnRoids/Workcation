@@ -7,26 +7,23 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.transition.Scene;
-import android.transition.Transition;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import butterknife.BindView;
 import com.droidsonroids.workcation.R;
 import com.droidsonroids.workcation.common.maps.MapBitmapCache;
-import com.droidsonroids.workcation.common.maps.MapFragment;
+import com.droidsonroids.workcation.common.maps.PulseWrapperLayout;
 import com.droidsonroids.workcation.common.model.Place;
 import com.droidsonroids.workcation.common.mvp.MvpFragment;
 import com.droidsonroids.workcation.common.transitions.ScaleDownImageTransition;
-import com.droidsonroids.workcation.common.transitions.TransitionListenerAdapter;
 import com.droidsonroids.workcation.common.transitions.TransitionUtils;
 import com.droidsonroids.workcation.common.views.HorizontalRecyclerViewScrollListener;
 import com.droidsonroids.workcation.common.views.TranslateItemAnimator;
 import com.droidsonroids.workcation.screens.main.MainActivity;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import java.util.ArrayList;
@@ -38,11 +35,11 @@ public class DetailsFragment extends MvpFragment<DetailsFragmentView, DetailsFra
 
     @BindView(R.id.recyclerview) RecyclerView recyclerView;
     @BindView(R.id.container) FrameLayout containerLayout;
-    @BindView(R.id.mapPlaceholder)
-    ImageView mapPlaceholder;
+    @BindView(R.id.mapPlaceholder) ImageView mapPlaceholder;
+    @BindView(R.id.mapWrapperLayout)
+    PulseWrapperLayout mapWrapperLayout;
 
     private List<Place> baliPlaces;
-    private MapFragment mapFragment;
     private BaliPlacesAdapter baliAdapter;
     private String currentTransitionName;
     private Scene detailsScene;
@@ -51,6 +48,7 @@ public class DetailsFragment extends MvpFragment<DetailsFragmentView, DetailsFra
         DetailsFragment fragment = new DetailsFragment();
         ScaleDownImageTransition transition = new ScaleDownImageTransition(ctx, MapBitmapCache.instance().getBitmap());
         transition.addTarget(ctx.getString(R.string.mapPlaceholderTransition));
+        transition.setDuration(600);
         fragment.setEnterTransition(transition);
         return fragment;
     }
@@ -80,27 +78,12 @@ public class DetailsFragment extends MvpFragment<DetailsFragmentView, DetailsFra
 
     @Override
     public int getLayout() {
-        return R.layout.fragment_map;
-    }
-
-    @Nullable
-    @Override
-    public View onCreateView(final LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
-        postponeEnterTransition();
-        return super.onCreateView(inflater, container, savedInstanceState);
+        return R.layout.fragment_details;
     }
 
     @Override
     public void onViewCreated(final View view, @Nullable final Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        ((Transition)getEnterTransition()).addListener(new TransitionListenerAdapter() {
-            @Override
-            public void onTransitionEnd(final Transition transition) {
-                super.onTransitionEnd(transition);
-                mapPlaceholder.setVisibility(View.GONE);
-            }
-        });
-        startPostponedEnterTransition();
         setupBaliData();
         setupMapFragment();
         setupRecyclerView();
@@ -111,8 +94,7 @@ public class DetailsFragment extends MvpFragment<DetailsFragmentView, DetailsFra
     }
 
     private void setupMapFragment() {
-        mapFragment = (MapFragment) getChildFragmentManager().findFragmentById(R.id.mapview);
-        mapFragment.getMapAsync(this);
+        ((SupportMapFragment)getChildFragmentManager().findFragmentById(R.id.mapFragment)).getMapAsync(this);
     }
 
     private void setupRecyclerView() {
@@ -122,13 +104,9 @@ public class DetailsFragment extends MvpFragment<DetailsFragmentView, DetailsFra
 
     @Override
     public void onMapReady(final GoogleMap googleMap) {
-        mapFragment.setupMap(googleMap);
+        mapWrapperLayout.setupMap(googleMap);
         setupGoogleMap();
         addDataToRecyclerView();
-    }
-
-    private void hidePlaceholder() {
-        mapPlaceholder.setVisibility(View.GONE);
     }
 
     private void setupGoogleMap() {
@@ -151,17 +129,17 @@ public class DetailsFragment extends MvpFragment<DetailsFragmentView, DetailsFra
     }
 
     private void getRoutePointsAndAnimateMap(final int position) {
-        presenter.getRoutePoints(mapFragment.getCurrentMapLatLng(), position);
+        presenter.getRoutePoints(mapWrapperLayout.getCurrentLatLng(), position);
     }
 
     private void animateMap() {
-        mapFragment.setCameraListenerToNull();
-        mapFragment.hideMarkers();
+        mapWrapperLayout.setOnCameraIdleListener(null);
+        mapWrapperLayout.hideAllMarkers();
     }
 
     @Override
     public void drawPolylinesOnMap(final ArrayList<LatLng> polylines) {
-        mapFragment.drawPolylines(polylines);
+        getActivity().runOnUiThread(() -> mapWrapperLayout.addPolyline(polylines));
     }
 
     @Override
@@ -174,7 +152,7 @@ public class DetailsFragment extends MvpFragment<DetailsFragmentView, DetailsFra
         int childPosition = TransitionUtils.getItemPositionFromTransition(currentTransitionName);
         BaliDetailsLayout.hideScene(getActivity(), containerLayout, getSharedViewByPosition(childPosition), currentTransitionName);
         notifyLayoutAfterBackPress(childPosition);
-        mapFragment.onBackPressedWithScene(latLngBounds);
+        mapWrapperLayout.onBackPressed(latLngBounds);
         detailsScene = null;
     }
 
@@ -187,17 +165,26 @@ public class DetailsFragment extends MvpFragment<DetailsFragmentView, DetailsFra
 
     @Override
     public void moveMapAndAddMaker(final LatLngBounds latLngBounds) {
-        mapFragment.moveMap(latLngBounds);
-        mapFragment.addMarkers(baliPlaces);
+        mapWrapperLayout.moveCamera(latLngBounds);
+        mapWrapperLayout.setOnCameraIdleListener(() -> {
+            for (int i = 0; i < baliPlaces.size(); i++) {
+                mapWrapperLayout.createMarker(i, baliPlaces.get(i).getLatLng());
+            }
+            mapWrapperLayout.setOnCameraIdleListener(null);
+        });
+        mapWrapperLayout.setOnCameraMoveListener(mapWrapperLayout::refresh);
     }
 
     @Override
     public void updateMapZoomAndRegion(final LatLng northeastLatLng, final LatLng southwestLatLng) {
-        getActivity().runOnUiThread(() -> mapFragment.updateZoomAndRegion(northeastLatLng, southwestLatLng));
+        getActivity().runOnUiThread(() -> {
+            mapWrapperLayout.animateCamera(new LatLngBounds(southwestLatLng, northeastLatLng));
+            mapWrapperLayout.setOnCameraIdleListener(() -> mapWrapperLayout.drawStartAndFinishMarker());
+        });
     }
 
     @Override
     public void onShowAnimation(final int position) {
-        mapFragment.showMarker(position);
+        mapWrapperLayout.showMarker(position);
     }
 }

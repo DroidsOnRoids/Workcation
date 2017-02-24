@@ -3,7 +3,7 @@ package com.droidsonroids.workcation.screens.main;
 import android.os.Bundle;
 import butterknife.OnClick;
 import com.droidsonroids.workcation.R;
-import com.droidsonroids.workcation.common.model.BaliDataProvider;
+import com.droidsonroids.workcation.common.maps.MapsUtil;
 import com.droidsonroids.workcation.common.mvp.MvpActivity;
 import com.droidsonroids.workcation.common.mvp.MvpFragment;
 import com.droidsonroids.workcation.screens.main.home.HomeFragment;
@@ -12,8 +12,12 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.LatLngBounds;
 
 public class MainActivity extends MvpActivity<MainView, MainPresenter> implements MainView, OnMapReadyCallback {
+
+    SupportMapFragment mapFragment;
+    private LatLngBounds mapLatLngBounds;
 
     @Override
     protected MainPresenter createPresenter() {
@@ -28,13 +32,14 @@ public class MainActivity extends MvpActivity<MainView, MainPresenter> implement
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        presenter.provideMapLatLngBounds();
         getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.container, HomeFragment.newInstance(), HomeFragment.TAG)
                 .addToBackStack(HomeFragment.TAG)
                 .commit();
-        final SupportMapFragment supportMapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.mapview);
-        supportMapFragment.getMapAsync(this);
+        mapFragment = (SupportMapFragment)getSupportFragmentManager().findFragmentById(R.id.mapFragment);
+        mapFragment.getMapAsync(this);
     }
 
     @OnClick(R.id.explore)
@@ -59,11 +64,17 @@ public class MainActivity extends MvpActivity<MainView, MainPresenter> implement
     }
 
     @Override
+    public void setMapLatLngBounds(final LatLngBounds latLngBounds) {
+        mapLatLngBounds = latLngBounds;
+    }
+
+    @Override
     public void onMapReady(final GoogleMap googleMap) {
-        googleMap.setOnMapLoadedCallback(() -> {
-            googleMap.moveCamera(CameraUpdateFactory.newLatLngBounds(BaliDataProvider.instance().provideLatLngBoundsForAllPlaces(), 15));
-            googleMap.setOnCameraIdleListener(() -> presenter.preloadMap(googleMap));
-        });
+        googleMap.moveCamera(CameraUpdateFactory.newLatLngBounds(
+                mapLatLngBounds,
+                MapsUtil.calculateWidth(getWindowManager()),
+                MapsUtil.calculateHeight(getWindowManager(), getResources().getDimensionPixelSize(R.dimen.map_margin_bottom)), 150));
+        googleMap.setOnMapLoadedCallback(() -> googleMap.snapshot(presenter::saveBitmap));
     }
 
     private void triggerFragmentBackPress(final int count) {

@@ -4,8 +4,8 @@
     android:layout_height="match_parent">
 
     <fragment
-        android:id="@+id/mapview"
-        class="com.droidsonroids.workcation.common.maps.MapFragment"
+        android:id="@+id/mapFragment"
+        class="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginBottom="@dimen/map_margin_bottom"/>

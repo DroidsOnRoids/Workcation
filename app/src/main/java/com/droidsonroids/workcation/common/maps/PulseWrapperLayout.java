@@ -4,7 +4,9 @@ import android.content.Context;
 import android.graphics.Point;
 import android.support.annotation.NonNull;
 import android.util.AttributeSet;
+import com.droidsonroids.workcation.R;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
 
 public class PulseWrapperLayout extends MapWrapperLayout {
     private static final int ANIMATION_DELAY_FACTOR = 100;
@@ -18,6 +20,7 @@ public class PulseWrapperLayout extends MapWrapperLayout {
 
     public PulseWrapperLayout(final Context context, final AttributeSet attrs) {
         super(context, attrs);
+        inflate(context, R.layout.pulse_wrapper_layout, this);
     }
 
     public void setupMarkers(final Point point, final LatLng latLng) {
@@ -73,5 +76,18 @@ public class PulseWrapperLayout extends MapWrapperLayout {
         addStartMarker((LatLng)polylines.get(0));
         addFinishMarker((LatLng)polylines.get(polylines.size() - 1));
         setOnCameraIdleListener(null);
+    }
+
+    public void onBackPressed(final LatLngBounds latLngBounds) {
+        moveCamera(latLngBounds);
+        removeStartAndFinishMarkers();
+        removeCurrentPolyline();
+        showAllMarkers();
+        refresh();
+    }
+
+    private void removeStartAndFinishMarkers() {
+        removeStartMarker();
+        removeFinishMarker();
     }
 }

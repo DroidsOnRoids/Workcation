@@ -47,6 +47,14 @@ public class ScaleDownImageTransition extends Transition {
         }
     }
 
+    public void setBitmap(final Bitmap bitmap) {
+        this.bitmap = bitmap;
+    }
+
+    public void setScaleFactor(final int factor) {
+        targetScaleFactor = factor;
+    }
+
     @Override
     public Animator createAnimator(final ViewGroup sceneRoot, final TransitionValues startValues, final TransitionValues endValues) {
         if (null == endValues) {
@@ -63,9 +71,11 @@ public class ScaleDownImageTransition extends Transition {
 
             ObjectAnimator scaleXAnimator = ObjectAnimator.ofFloat(view, View.SCALE_X, targetScaleX, scaleX);
             ObjectAnimator scaleYAnimator = ObjectAnimator.ofFloat(view, View.SCALE_Y, targetScaleY, scaleY);
-            AnimatorSet set = new AnimatorSet();
-            set.playTogether(scaleXAnimator, scaleYAnimator, ObjectAnimator.ofFloat(view, View.ALPHA, 0.2f, 1.f));
-            return set;
+            AnimatorSet parallelSet = new AnimatorSet();
+            parallelSet.playTogether(scaleXAnimator, scaleYAnimator, ObjectAnimator.ofFloat(view, View.ALPHA, 0f, 1f));
+            AnimatorSet sequentialSet = new AnimatorSet();
+            sequentialSet.playSequentially(parallelSet, ObjectAnimator.ofFloat(view, View.ALPHA, 1f, 0f));
+            return sequentialSet;
         }
         return null;
     }
