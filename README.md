@@ -1,7 +1,6 @@
 # Idea
-In august '16 our company @DroidsOnRoids have left the office located in Wrocław, Poland, to take part in a month long [Workcation on Bali](https://www.thedroidsonroids.com/bali-workcation).
-In october '16 we had a company meeting, where my friend [Paweł Szymankiewicz](https://dribbble.com/pawelszymankiewicz) shown an animation
-he made about the company trip to Bali. When I saw it, I decided to make it as precisely as possible. I never knew what I decided for...
+In august '16 our company [Droids On Roids](https://github.com/DroidsOnRoids) have left the office located in Wrocław, Poland, to take part in a month long [Workcation on Bali](https://www.thedroidsonroids.com/bali-workcation).
+In october '16 we had a company meeting, where my friend [Paweł Szymankiewicz](https://dribbble.com/pawelszymankiewicz) shown an animation he made about the company trip to Bali. When I saw it, I decided to make it as precisely as possible. I never knew what I decided for...
 
 # Workcation App
 
