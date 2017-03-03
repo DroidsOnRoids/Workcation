@@ -11,7 +11,10 @@ Sometimes it was difficult to find out the solution for this animation. I want t
 
 # Blog Posts
 
+I also want to share the collection of 5 blog posts I wrote about this project. They will be :
 
-I also want to share the collection of 5 blog posts I wrote about this project:
-
-1. [Part 1: Fragment custom transition](https://www.thedroidsonroids.com/blog/android/workcation-app-part-1-fragments-custom-transition/)
+[Part 1: Fragment custom transition](https://www.thedroidsonroids.com/blog/android/workcation-app-part-1-fragments-custom-transition/)
+Part 2: Map loading and MapWrapperLayout
+Part 3: Animated Markers
+Part 4: RecyclerView - Notifying markers while scrolling
+Part 5: DetailsLayout - Shared Element Transition with Scenes
