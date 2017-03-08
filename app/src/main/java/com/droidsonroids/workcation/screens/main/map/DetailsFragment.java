@@ -13,7 +13,7 @@ import android.widget.ImageView;
 import butterknife.BindView;
 import com.droidsonroids.workcation.R;
 import com.droidsonroids.workcation.common.maps.MapBitmapCache;
-import com.droidsonroids.workcation.common.maps.PulseWrapperLayout;
+import com.droidsonroids.workcation.common.maps.PulseOverlayLayout;
 import com.droidsonroids.workcation.common.model.Place;
 import com.droidsonroids.workcation.common.mvp.MvpFragment;
 import com.droidsonroids.workcation.common.transitions.ScaleDownImageTransition;
@@ -36,8 +36,7 @@ public class DetailsFragment extends MvpFragment<DetailsFragmentView, DetailsFra
     @BindView(R.id.recyclerview) RecyclerView recyclerView;
     @BindView(R.id.container) FrameLayout containerLayout;
     @BindView(R.id.mapPlaceholder) ImageView mapPlaceholder;
-    @BindView(R.id.mapWrapperLayout)
-    PulseWrapperLayout mapWrapperLayout;
+    @BindView(R.id.mapOverlayLayout) PulseOverlayLayout mapOverlayLayout;
 
     private List<Place> baliPlaces;
     private BaliPlacesAdapter baliAdapter;
@@ -104,7 +103,7 @@ public class DetailsFragment extends MvpFragment<DetailsFragmentView, DetailsFra
 
     @Override
     public void onMapReady(final GoogleMap googleMap) {
-        mapWrapperLayout.setupMap(googleMap);
+        mapOverlayLayout.setupMap(googleMap);
         setupGoogleMap();
         addDataToRecyclerView();
     }
@@ -129,17 +128,17 @@ public class DetailsFragment extends MvpFragment<DetailsFragmentView, DetailsFra
     }
 
     private void getRoutePointsAndAnimateMap(final int position) {
-        presenter.getRoutePoints(mapWrapperLayout.getCurrentLatLng(), position);
+        presenter.getRoutePoints(mapOverlayLayout.getCurrentLatLng(), position);
     }
 
     private void animateMap() {
-        mapWrapperLayout.setOnCameraIdleListener(null);
-        mapWrapperLayout.hideAllMarkers();
+        mapOverlayLayout.setOnCameraIdleListener(null);
+        mapOverlayLayout.hideAllMarkers();
     }
 
     @Override
     public void drawPolylinesOnMap(final ArrayList<LatLng> polylines) {
-        getActivity().runOnUiThread(() -> mapWrapperLayout.addPolyline(polylines));
+        getActivity().runOnUiThread(() -> mapOverlayLayout.addPolyline(polylines));
     }
 
     @Override
@@ -152,7 +151,7 @@ public class DetailsFragment extends MvpFragment<DetailsFragmentView, DetailsFra
         int childPosition = TransitionUtils.getItemPositionFromTransition(currentTransitionName);
         BaliDetailsLayout.hideScene(getActivity(), containerLayout, getSharedViewByPosition(childPosition), currentTransitionName);
         notifyLayoutAfterBackPress(childPosition);
-        mapWrapperLayout.onBackPressed(latLngBounds);
+        mapOverlayLayout.onBackPressed(latLngBounds);
         detailsScene = null;
     }
 
@@ -165,26 +164,26 @@ public class DetailsFragment extends MvpFragment<DetailsFragmentView, DetailsFra
 
     @Override
     public void moveMapAndAddMaker(final LatLngBounds latLngBounds) {
-        mapWrapperLayout.moveCamera(latLngBounds);
-        mapWrapperLayout.setOnCameraIdleListener(() -> {
+        mapOverlayLayout.moveCamera(latLngBounds);
+        mapOverlayLayout.setOnCameraIdleListener(() -> {
             for (int i = 0; i < baliPlaces.size(); i++) {
-                mapWrapperLayout.createMarker(i, baliPlaces.get(i).getLatLng());
+                mapOverlayLayout.createAndShowMarker(i, baliPlaces.get(i).getLatLng());
             }
-            mapWrapperLayout.setOnCameraIdleListener(null);
+            mapOverlayLayout.setOnCameraIdleListener(null);
         });
-        mapWrapperLayout.setOnCameraMoveListener(mapWrapperLayout::refresh);
+        mapOverlayLayout.setOnCameraMoveListener(mapOverlayLayout::refresh);
     }
 
     @Override
     public void updateMapZoomAndRegion(final LatLng northeastLatLng, final LatLng southwestLatLng) {
         getActivity().runOnUiThread(() -> {
-            mapWrapperLayout.animateCamera(new LatLngBounds(southwestLatLng, northeastLatLng));
-            mapWrapperLayout.setOnCameraIdleListener(() -> mapWrapperLayout.drawStartAndFinishMarker());
+            mapOverlayLayout.animateCamera(new LatLngBounds(southwestLatLng, northeastLatLng));
+            mapOverlayLayout.setOnCameraIdleListener(() -> mapOverlayLayout.drawStartAndFinishMarker());
         });
     }
 
     @Override
     public void onShowAnimation(final int position) {
-        mapWrapperLayout.showMarker(position);
+        mapOverlayLayout.showMarker(position);
     }
 }

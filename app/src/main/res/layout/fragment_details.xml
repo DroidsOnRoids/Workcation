@@ -11,8 +11,8 @@
         android:layout_height="match_parent"
         android:layout_marginBottom="@dimen/map_margin_bottom" />
 
-    <com.droidsonroids.workcation.common.maps.PulseWrapperLayout
-        android:id="@+id/mapWrapperLayout"
+    <com.droidsonroids.workcation.common.maps.PulseOverlayLayout
+        android:id="@+id/mapOverlayLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginBottom="@dimen/map_margin_bottom">
@@ -23,7 +23,7 @@
             android:layout_height="match_parent"
             android:transitionName="@string/mapPlaceholderTransition"/>
 
-        </com.droidsonroids.workcation.common.maps.PulseWrapperLayout>
+        </com.droidsonroids.workcation.common.maps.PulseOverlayLayout>
 
     <FrameLayout
         android:id="@+id/container"
@@ -37,7 +37,5 @@
             android:layout_gravity="bottom" />
 
     </FrameLayout>
-
-
 
 </android.support.design.widget.CoordinatorLayout>

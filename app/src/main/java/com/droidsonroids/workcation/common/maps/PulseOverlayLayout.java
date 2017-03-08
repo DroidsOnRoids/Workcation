@@ -8,17 +8,17 @@ import com.droidsonroids.workcation.R;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 
-public class PulseWrapperLayout extends MapWrapperLayout {
+public class PulseOverlayLayout extends MapOverlayLayout {
     private static final int ANIMATION_DELAY_FACTOR = 100;
 
     private PulseMarkerView startMarker, finishMarker;
     private int scaleAnimationDelay = 100;
 
-    public PulseWrapperLayout(final Context context) {
+    public PulseOverlayLayout(final Context context) {
         this(context, null);
     }
 
-    public PulseWrapperLayout(final Context context, final AttributeSet attrs) {
+    public PulseOverlayLayout(final Context context, final AttributeSet attrs) {
         super(context, attrs);
         inflate(context, R.layout.pulse_wrapper_layout, this);
     }
@@ -37,33 +37,33 @@ public class PulseWrapperLayout extends MapWrapperLayout {
     }
 
     public void addStartMarker(final LatLng latLng) {
-        startMarker = createPulseView(latLng);
+        startMarker = createPulseMarkerView(latLng);
         startMarker.updatePulseViewLayoutParams(googleMap.getProjection().toScreenLocation(latLng));
         addMarker(startMarker);
         startMarker.show();
     }
 
     public void addFinishMarker(final LatLng latLng) {
-        finishMarker = createPulseView(latLng);
+        finishMarker = createPulseMarkerView(latLng);
         finishMarker.updatePulseViewLayoutParams(googleMap.getProjection().toScreenLocation(latLng));
         addMarker(finishMarker);
         finishMarker.show();
     }
 
     @NonNull
-    private PulseMarkerView createPulseView(final LatLng latLng) {
+    private PulseMarkerView createPulseMarkerView(final LatLng latLng) {
         return new PulseMarkerView(getContext(), latLng, googleMap.getProjection().toScreenLocation(latLng));
     }
 
     @NonNull
-    private PulseMarkerView createPulseView(final int position, final Point point, final LatLng latLng) {
+    private PulseMarkerView createPulseMarkerView(final int position, final Point point, final LatLng latLng) {
         PulseMarkerView pulseMarkerView = new PulseMarkerView(getContext(), latLng, point, position);
         addMarker(pulseMarkerView);
         return pulseMarkerView;
     }
 
-    public void createMarker(final int position, final LatLng latLng) {
-        PulseMarkerView marker = createPulseView(position, googleMap.getProjection().toScreenLocation(latLng), latLng);
+    public void createAndShowMarker(final int position, final LatLng latLng) {
+        PulseMarkerView marker = createPulseMarkerView(position, googleMap.getProjection().toScreenLocation(latLng), latLng);
         marker.showWithDelay(scaleAnimationDelay);
         scaleAnimationDelay += ANIMATION_DELAY_FACTOR;
     }

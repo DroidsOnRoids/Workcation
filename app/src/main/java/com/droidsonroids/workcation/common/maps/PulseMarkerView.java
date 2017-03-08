@@ -4,7 +4,6 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
-import android.animation.ValueAnimator;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
@@ -17,20 +16,20 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.FrameLayout;
 import com.droidsonroids.workcation.R;
-import com.droidsonroids.workcation.common.maps.MarkerView;
 import com.droidsonroids.workcation.common.views.GuiUtils;
 import com.google.android.gms.maps.model.LatLng;
 
 public class PulseMarkerView extends MarkerView {
+    private static final int STROKE_DIMEN = 2;
 
     private final Context context;
-    private float mSize;
-    private Animation mScaleAnimation;
-    private Paint mStrokeBackgroundPaint;
-    private Paint mBackgroundPaint;
-    private String mText;
-    private Paint mTextPaint;
-    private AnimatorSet showAnimatorSet, hideAnimatorSet, pulseAnimatorSet;
+    private float size;
+    private Animation scaleAnimation;
+    private Paint strokeBackgroundPaint;
+    private Paint backgroundPaint;
+    private String text;
+    private Paint textPaint;
+    private AnimatorSet showAnimatorSet, hideAnimatorSet;
 
     public PulseMarkerView(final Context context, final LatLng latLng, final Point point) {
         super(context, latLng, point);
@@ -43,23 +42,11 @@ public class PulseMarkerView extends MarkerView {
         setupTextPaint(context);
         setupShowAnimatorSet();
         setupHideAnimatorSet();
-        setupPulseAnimator();
     }
 
     public PulseMarkerView(final Context context, final LatLng latLng, final Point point, final int position) {
         this(context, latLng, point);
-        mText = String.valueOf(position);
-    }
-
-    private void setupPulseAnimator() {
-        ObjectAnimator animatorScaleX = ObjectAnimator.ofFloat(this, View.SCALE_X, 1.0f, 1.5f);
-        animatorScaleX.setRepeatMode(ValueAnimator.REVERSE);
-        ObjectAnimator animatorScaleY = ObjectAnimator.ofFloat(this, View.SCALE_Y, 1.0f, 1.5f);
-        animatorScaleY.setRepeatMode(ValueAnimator.REVERSE);
-
-        pulseAnimatorSet = new AnimatorSet();
-        pulseAnimatorSet.setDuration(100);
-        pulseAnimatorSet.playTogether(animatorScaleX, animatorScaleY);
+        text = String.valueOf(position);
     }
 
     private void setupHideAnimatorSet() {
@@ -79,7 +66,7 @@ public class PulseMarkerView extends MarkerView {
     }
 
     private void setupSizes(final Context context) {
-        mSize = GuiUtils.dpToPx(context, 32) / 2;
+        size = GuiUtils.dpToPx(context, 32) / 2;
     }
 
     private void setupShowAnimatorSet() {
@@ -99,29 +86,29 @@ public class PulseMarkerView extends MarkerView {
     }
 
     private void setupScaleAnimation(final Context context) {
-        mScaleAnimation = AnimationUtils.loadAnimation(context, R.anim.pulse);
-        mScaleAnimation.setDuration(100);
+        scaleAnimation = AnimationUtils.loadAnimation(context, R.anim.pulse);
+        scaleAnimation.setDuration(100);
     }
 
     private void setupTextPaint(final Context context) {
-        mTextPaint = new Paint();
-        mTextPaint.setColor(ContextCompat.getColor(context, R.color.white));
-        mTextPaint.setTextAlign(Paint.Align.CENTER);
-        mTextPaint.setTextSize(context.getResources().getDimensionPixelSize(R.dimen.textsize_medium));
+        textPaint = new Paint();
+        textPaint.setColor(ContextCompat.getColor(context, R.color.white));
+        textPaint.setTextAlign(Paint.Align.CENTER);
+        textPaint.setTextSize(context.getResources().getDimensionPixelSize(R.dimen.textsize_medium));
     }
 
     private void setupStrokeBackgroundPaint(final Context context) {
-        mStrokeBackgroundPaint = new Paint();
-        mStrokeBackgroundPaint.setColor(ContextCompat.getColor(context, android.R.color.white));
-        mStrokeBackgroundPaint.setStyle(Paint.Style.STROKE);
-        mStrokeBackgroundPaint.setAntiAlias(true);
-        mStrokeBackgroundPaint.setStrokeWidth(GuiUtils.dpToPx(context, 2));
+        strokeBackgroundPaint = new Paint();
+        strokeBackgroundPaint.setColor(ContextCompat.getColor(context, android.R.color.white));
+        strokeBackgroundPaint.setStyle(Paint.Style.STROKE);
+        strokeBackgroundPaint.setAntiAlias(true);
+        strokeBackgroundPaint.setStrokeWidth(GuiUtils.dpToPx(context, STROKE_DIMEN));
     }
 
     private void setupBackgroundPaint(final Context context) {
-        mBackgroundPaint = new Paint();
-        mBackgroundPaint.setColor(ContextCompat.getColor(context, android.R.color.holo_red_dark));
-        mBackgroundPaint.setAntiAlias(true);
+        backgroundPaint = new Paint();
+        backgroundPaint.setColor(ContextCompat.getColor(context, android.R.color.holo_red_dark));
+        backgroundPaint.setAntiAlias(true);
     }
 
     @Override
@@ -135,7 +122,7 @@ public class PulseMarkerView extends MarkerView {
     }
 
     public void pulse() {
-        startAnimation(mScaleAnimation);
+        startAnimation(scaleAnimation);
     }
 
     @Override
@@ -147,20 +134,20 @@ public class PulseMarkerView extends MarkerView {
     }
 
     private void drawText(final Canvas canvas) {
-        if(mText != null && !TextUtils.isEmpty(mText))
-            canvas.drawText(mText, mSize, (mSize - ((mTextPaint.descent() + mTextPaint.ascent()) / 2)), mTextPaint);
+        if(text != null && !TextUtils.isEmpty(text))
+            canvas.drawText(text, size, (size - ((textPaint.descent() + textPaint.ascent()) / 2)), textPaint);
     }
 
     private void drawStrokeBackground(final Canvas canvas) {
-        canvas.drawCircle(mSize, mSize, GuiUtils.dpToPx(context, 28) / 2, mStrokeBackgroundPaint);
+        canvas.drawCircle(size, size, GuiUtils.dpToPx(context, 28) / 2, strokeBackgroundPaint);
     }
 
     private void drawBackground(final Canvas canvas) {
-        canvas.drawCircle(mSize, mSize, mSize, mBackgroundPaint);
+        canvas.drawCircle(size, size, size, backgroundPaint);
     }
 
     public void setText(String text) {
-        mText = text;
+        this.text = text;
         invalidate();
     }
 

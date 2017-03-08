@@ -15,18 +15,18 @@ import com.google.android.gms.maps.model.PolylineOptions;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MapWrapperLayout<V extends MarkerView> extends FrameLayout {
+public class MapOverlayLayout<V extends MarkerView> extends FrameLayout {
 
     protected List<V> markersList;
     protected Polyline currentPolyline;
     protected GoogleMap googleMap;
     protected ArrayList<LatLng> polylines;
 
-    public MapWrapperLayout(final Context context) {
+    public MapOverlayLayout(final Context context) {
         this(context, null);
     }
 
-    public MapWrapperLayout(final Context context, final AttributeSet attrs) {
+    public MapOverlayLayout(final Context context, final AttributeSet attrs) {
         super(context, attrs);
         markersList = new ArrayList<>();
     }
