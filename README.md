@@ -18,7 +18,7 @@ I also want to share the collection of 5 blog posts I wrote about this project. 
 
 * [Part 1: Fragment custom transition](https://www.thedroidsonroids.com/blog/android/workcation-app-part-1-fragments-custom-transition/)
 * [Part 2: Animating Markers with MapOverlayLayout](https://www.thedroidsonroids.com/blog/workcation-app-part-2-animating-markers-with-mapoverlaylayout/)
-* Part 3: RecyclerView - Notifying markers while scrolling
+* [Part 3: RecyclerView interaction with Animated Markers](https://www.thedroidsonroids.com/blog/workcation-app-part-3-recyclerview-interaction-with-animated-markers/)
 * Part 4: DetailsLayout - Shared Element Transition with Scenes
 
 # License
