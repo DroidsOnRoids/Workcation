@@ -30,7 +30,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DetailsFragment extends MvpFragment<DetailsFragmentView, DetailsFragmentPresenter>
-        implements DetailsFragmentView, OnMapReadyCallback, BaliPlacesAdapter.OnPlaceClickListener, HorizontalRecyclerViewScrollListener.OnShowScaleAnimationListener {
+        implements DetailsFragmentView, OnMapReadyCallback, BaliPlacesAdapter.OnPlaceClickListener, HorizontalRecyclerViewScrollListener.OnItemCoverListener {
     public static final String TAG = DetailsFragment.class.getSimpleName();
 
     @BindView(R.id.recyclerview) RecyclerView recyclerView;
@@ -116,7 +116,7 @@ public class DetailsFragment extends MvpFragment<DetailsFragmentView, DetailsFra
         recyclerView.setItemAnimator(new TranslateItemAnimator());
         recyclerView.setAdapter(baliAdapter);
         baliAdapter.setPlacesList(baliPlaces);
-        recyclerView.addOnScrollListener(new HorizontalRecyclerViewScrollListener(baliPlaces.size(), this));
+        recyclerView.addOnScrollListener(new HorizontalRecyclerViewScrollListener(this));
     }
 
     @Override
@@ -183,7 +183,7 @@ public class DetailsFragment extends MvpFragment<DetailsFragmentView, DetailsFra
     }
 
     @Override
-    public void onShowAnimation(final int position) {
+    public void onItemCover(final int position) {
         mapOverlayLayout.showMarker(position);
     }
 }
