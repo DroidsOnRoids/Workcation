@@ -5,7 +5,7 @@ import com.google.android.gms.maps.model.LatLng;
 
 public interface DetailsFragmentPresenter extends MvpPresenter<DetailsFragmentView> {
 
-    void getRoutePoints(LatLng first, final int position);
+    void drawRoute(LatLng first, final int position);
 
     void provideBaliData();
 

@@ -9,19 +9,15 @@ import com.droidsonroids.workcation.R;
 import com.droidsonroids.workcation.common.transitions.TextResizeTransition;
 import com.droidsonroids.workcation.common.transitions.TransitionBuilder;
 
-/**
- * Created by droids on 10.02.2017.
- */
-
-public class HideDetailsTransitionSet extends TransitionSet {
+class HideDetailsTransitionSet extends TransitionSet {
     private static final String TITLE_TEXT_VIEW_TRANSITION_NAME = "titleTextView";
     private static final String CARD_VIEW_TRANSITION_NAME = "cardView";
     private final String transitionName;
     private final View from;
-    private final BaliDetailsLayout to;
+    private final DetailsLayout to;
     private final Context context;
 
-    public HideDetailsTransitionSet(final Context ctx, final String transitionName, final View from, final BaliDetailsLayout to) {
+    HideDetailsTransitionSet(final Context ctx, final String transitionName, final View from, final DetailsLayout to) {
         context = ctx;
         this.transitionName = transitionName;
         this.from = from;
@@ -34,7 +30,7 @@ public class HideDetailsTransitionSet extends TransitionSet {
         return transitionName + TITLE_TEXT_VIEW_TRANSITION_NAME;
     }
 
-    private String cardviewTransitionName() {
+    private String cardViewTransitionName() {
         return transitionName + CARD_VIEW_TRANSITION_NAME;
     }
 
@@ -47,7 +43,7 @@ public class HideDetailsTransitionSet extends TransitionSet {
     private Transition shared() {
         return new TransitionBuilder(TransitionInflater.from(context).inflateTransition(android.R.transition.move))
                 .link(from.findViewById(R.id.headerImage), to.imageViewPlaceDetails, transitionName)
-                .link(from, to.cardViewContainer, cardviewTransitionName())
+                .link(from, to.cardViewContainer, cardViewTransitionName())
                 .build();
     }
 }

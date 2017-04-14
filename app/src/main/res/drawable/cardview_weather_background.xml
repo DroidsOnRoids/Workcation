@@ -5,7 +5,7 @@
     android:type="radial"
     android:centerX="100%"
     android:centerY="0%"
-    android:gradientRadius="130%"
+    android:gradientRadius="130%p"
     android:startColor="@color/cardview_weather_start_color"
     android:centerColor="@color/cardview_weather_center_color"
     android:endColor="@color/cardview_weather_end_color" />

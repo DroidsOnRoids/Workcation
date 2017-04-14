@@ -17,7 +17,7 @@ import com.droidsonroids.workcation.common.transitions.TransitionUtils;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BaliPlacesAdapter extends RecyclerView.Adapter<BaliPlacesAdapter.BaliViewHolder> {
+class BaliPlacesAdapter extends RecyclerView.Adapter<BaliPlacesAdapter.BaliViewHolder> {
 
     private final OnPlaceClickListener listener;
     private Context context;
@@ -55,10 +55,10 @@ public class BaliPlacesAdapter extends RecyclerView.Adapter<BaliPlacesAdapter.Ba
     }
 
     interface OnPlaceClickListener {
-        void onPlaceClicked(View sharedImage, String transitionName, final int position);
+        void onPlaceClicked(View sharedView, String transitionName, final int position);
     }
 
-    public class BaliViewHolder extends RecyclerView.ViewHolder {
+    static class BaliViewHolder extends RecyclerView.ViewHolder {
 
         @BindView(R.id.title) TextView title;
         @BindView(R.id.price) TextView price;

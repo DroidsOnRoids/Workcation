@@ -22,7 +22,7 @@ public class DetailsFragmentPresenterImpl extends MvpPresenterImpl<DetailsFragme
     private BaliDataProvider baliDataProvider = BaliDataProvider.instance();
 
     @Override
-    public void getRoutePoints(final LatLng first, final int position) {
+    public void drawRoute(final LatLng first, final int position) {
         final LatLng second = new LatLng(baliDataProvider.getLatByPosition(position), baliDataProvider.getLngByPosition(position));
         mapsApiManager.getRoute(first, second, new Callback() {
             @Override

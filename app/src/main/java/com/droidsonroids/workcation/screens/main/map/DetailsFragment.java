@@ -35,7 +35,6 @@ public class DetailsFragment extends MvpFragment<DetailsFragmentView, DetailsFra
 
     @BindView(R.id.recyclerview) RecyclerView recyclerView;
     @BindView(R.id.container) FrameLayout containerLayout;
-    @BindView(R.id.mapPlaceholder) ImageView mapPlaceholder;
     @BindView(R.id.mapOverlayLayout) PulseOverlayLayout mapOverlayLayout;
 
     private List<Place> baliPlaces;
@@ -120,18 +119,18 @@ public class DetailsFragment extends MvpFragment<DetailsFragmentView, DetailsFra
     }
 
     @Override
-    public void onPlaceClicked(final View sharedImageView, final String transitionName, final int position) {
+    public void onPlaceClicked(final View sharedView, final String transitionName, final int position) {
         currentTransitionName = transitionName;
-        detailsScene = BaliDetailsLayout.showScene(getActivity(), containerLayout, sharedImageView, currentTransitionName, baliPlaces.get(position));
-        getRoutePointsAndAnimateMap(position);
-        animateMap();
+        detailsScene = DetailsLayout.showScene(getActivity(), containerLayout, sharedView, transitionName, baliPlaces.get(position));
+        drawRoute(position);
+        hideAllMarkers();
     }
 
-    private void getRoutePointsAndAnimateMap(final int position) {
-        presenter.getRoutePoints(mapOverlayLayout.getCurrentLatLng(), position);
+    private void drawRoute(final int position) {
+        presenter.drawRoute(mapOverlayLayout.getCurrentLatLng(), position);
     }
 
-    private void animateMap() {
+    private void hideAllMarkers() {
         mapOverlayLayout.setOnCameraIdleListener(null);
         mapOverlayLayout.hideAllMarkers();
     }
@@ -149,7 +148,7 @@ public class DetailsFragment extends MvpFragment<DetailsFragmentView, DetailsFra
     @Override
     public void onBackPressedWithScene(final LatLngBounds latLngBounds) {
         int childPosition = TransitionUtils.getItemPositionFromTransition(currentTransitionName);
-        BaliDetailsLayout.hideScene(getActivity(), containerLayout, getSharedViewByPosition(childPosition), currentTransitionName);
+        DetailsLayout.hideScene(getActivity(), containerLayout, getSharedViewByPosition(childPosition), currentTransitionName);
         notifyLayoutAfterBackPress(childPosition);
         mapOverlayLayout.onBackPressed(latLngBounds);
         detailsScene = null;

@@ -14,22 +14,21 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 import com.droidsonroids.workcation.R;
 import com.droidsonroids.workcation.common.model.Place;
 
-public class BaliDetailsLayout extends CoordinatorLayout {
+public class DetailsLayout extends CoordinatorLayout {
 
     @BindView(R.id.cardview) CardView cardViewContainer;
     @BindView(R.id.headerImage) ImageView imageViewPlaceDetails;
     @BindView(R.id.title) TextView textViewTitle;
     @BindView(R.id.description) TextView textViewDescription;
 
-    public BaliDetailsLayout(final Context context) {
+    public DetailsLayout(final Context context) {
         this(context, null);
     }
 
-    public BaliDetailsLayout(final Context context, final AttributeSet attrs) {
+    public DetailsLayout(final Context context, final AttributeSet attrs) {
         super(context, attrs);
     }
 
@@ -45,20 +44,20 @@ public class BaliDetailsLayout extends CoordinatorLayout {
     }
 
     public static Scene showScene(Activity activity, final ViewGroup container, final View sharedView, final String transitionName, final Place data) {
-        BaliDetailsLayout baliDetailsLayout = (BaliDetailsLayout) activity.getLayoutInflater().inflate(R.layout.item_place, container, false);
-        baliDetailsLayout.setData(data);
+        DetailsLayout detailsLayout = (DetailsLayout) activity.getLayoutInflater().inflate(R.layout.item_place, container, false);
+        detailsLayout.setData(data);
 
-        TransitionSet set = new ShowDetailsTransitionSet(activity, transitionName, sharedView, baliDetailsLayout);
-        Scene scene = new Scene(container, (View)baliDetailsLayout);
+        TransitionSet set = new ShowDetailsTransitionSet(activity, transitionName, sharedView, detailsLayout);
+        Scene scene = new Scene(container, (View) detailsLayout);
         TransitionManager.go(scene, set);
         return scene;
     }
 
     public static Scene hideScene(Activity activity, final ViewGroup container, final View sharedView, final String transitionName) {
-        BaliDetailsLayout baliDetailsLayout = (BaliDetailsLayout) container.findViewById(R.id.bali_details_container);
+        DetailsLayout detailsLayout = (DetailsLayout) container.findViewById(R.id.bali_details_container);
 
-        TransitionSet set = new HideDetailsTransitionSet(activity, transitionName, sharedView, baliDetailsLayout);
-        Scene scene = new Scene(container, (View)baliDetailsLayout);
+        TransitionSet set = new HideDetailsTransitionSet(activity, transitionName, sharedView, detailsLayout);
+        Scene scene = new Scene(container, (View) detailsLayout);
         TransitionManager.go(scene, set);
         return scene;
     }

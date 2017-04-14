@@ -7,6 +7,6 @@
         android:centerY="0%"
         android:startColor="@color/cardview_trip_start_color"
         android:endColor="@color/cardview_trip_end_color"
-        android:gradientRadius="100%"/>
+        android:gradientRadius="100%p"/>
 
 </shape>

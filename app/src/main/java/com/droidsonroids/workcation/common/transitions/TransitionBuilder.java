@@ -9,8 +9,6 @@ import android.view.View;
 public class TransitionBuilder {
 
     private Transition transition;
-    private String transitionName;
-    private int duration;
 
     public TransitionBuilder(final Transition transition) {
         this.transition = transition;

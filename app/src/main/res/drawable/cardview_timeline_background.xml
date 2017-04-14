@@ -7,6 +7,6 @@
         android:centerY="0%"
         android:startColor="@color/cardview_timeline_start_color"
         android:endColor="@color/cardview_timeline_end_color"
-        android:gradientRadius="100%"/>
+        android:gradientRadius="100%p"/>
 
 </shape>
