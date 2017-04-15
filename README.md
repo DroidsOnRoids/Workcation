@@ -1,5 +1,6 @@
 [![Android Weekly](https://img.shields.io/badge/Android%20Weekly-%23247-2CB3E5.svg)](http://androidweekly.net/issues/issue-247)
 [![Android Weekly](https://img.shields.io/badge/Android%20Weekly-%23248-2CB3E5.svg)](http://androidweekly.net/issues/issue-248)
+[![Android Weekly](https://img.shields.io/badge/Android%20Weekly-%23252-2CB3E5.svg)](http://androidweekly.net/issues/issue-252)
 
 [![Android Dev Digest](https://img.shields.io/badge/Android%20Dev%20Digest-%23134-23A49E.svg)](https://www.androiddevdigest.com/digest134/)
 [![Android Dev Digest](https://img.shields.io/badge/Android%20Dev%20Digest-%23135-23A49E.svg)](https://www.androiddevdigest.com/digest135/)
@@ -20,7 +21,7 @@ I also want to share the collection of 5 blog posts I wrote about this project. 
 * [Part 1: Fragment custom transition](https://www.thedroidsonroids.com/blog/android/workcation-app-part-1-fragments-custom-transition/)
 * [Part 2: Animating Markers with MapOverlayLayout](https://www.thedroidsonroids.com/blog/workcation-app-part-2-animating-markers-with-mapoverlaylayout/)
 * [Part 3: RecyclerView interaction with Animated Markers](https://www.thedroidsonroids.com/blog/workcation-app-part-3-recyclerview-interaction-with-animated-markers/)
-* Part 4: DetailsLayout - Shared Element Transition with Scenes
+* [Part 4: Shared Element Transitions with RecyclerView and Scenes Framework](https://www.thedroidsonroids.com/blog/workcation-app-part-4-shared-element-transition-recyclerview-scenes/)
 
 # License
 
