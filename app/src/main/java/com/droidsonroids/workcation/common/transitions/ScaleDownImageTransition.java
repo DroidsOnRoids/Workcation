@@ -10,17 +10,17 @@ import android.graphics.drawable.BitmapDrawable;
 import android.transition.Transition;
 import android.transition.TransitionValues;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.ImageView;
+
 import com.droidsonroids.workcation.R;
 
 public class ScaleDownImageTransition extends Transition {
     private static final int DEFAULT_SCALE_DOWN_FACTOR = 8;
-    private static final String PROPNAME_SCALE_X= "transitions:scale_down:scale_x";
-    private static final String PROPNAME_SCALE_Y= "transitions:scale_down:scale_y";
+    private static final String PROPNAME_SCALE_X = "transitions:scale_down:scale_x";
+    private static final String PROPNAME_SCALE_Y = "transitions:scale_down:scale_y";
     private Bitmap bitmap;
     private Context context;
 
@@ -61,13 +61,20 @@ public class ScaleDownImageTransition extends Transition {
             return null;
         }
         final View view = endValues.view;
-        if(view instanceof ImageView) {
-            if(bitmap != null) view.setBackground(new BitmapDrawable(context.getResources(), bitmap));
-            float scaleX = (float)startValues.values.get(PROPNAME_SCALE_X);
-            float scaleY = (float)startValues.values.get(PROPNAME_SCALE_Y);
+        if (view instanceof ImageView) {
+            if (bitmap != null)
+                view.setBackground(new BitmapDrawable(context.getResources(), bitmap));
 
-            float targetScaleX = (float)endValues.values.get(PROPNAME_SCALE_X);
-            float targetScaleY = (float)endValues.values.get(PROPNAME_SCALE_Y);
+            float scaleX = 0F;
+            float scaleY = 0F;
+
+            if (startValues != null) {
+                scaleX = (float) startValues.values.get(PROPNAME_SCALE_X);
+                scaleY = (float) startValues.values.get(PROPNAME_SCALE_Y);
+            }
+
+            float targetScaleX = (float) endValues.values.get(PROPNAME_SCALE_X);
+            float targetScaleY = (float) endValues.values.get(PROPNAME_SCALE_Y);
 
             ObjectAnimator scaleXAnimator = ObjectAnimator.ofFloat(view, View.SCALE_X, targetScaleX, scaleX);
             ObjectAnimator scaleYAnimator = ObjectAnimator.ofFloat(view, View.SCALE_Y, targetScaleY, scaleY);
@@ -82,7 +89,7 @@ public class ScaleDownImageTransition extends Transition {
 
     @Override
     public void captureStartValues(TransitionValues transitionValues) {
-        captureValues(transitionValues, transitionValues.view.getScaleX() , transitionValues.view.getScaleY());
+        captureValues(transitionValues, transitionValues.view.getScaleX(), transitionValues.view.getScaleY());
     }
 
     @Override
